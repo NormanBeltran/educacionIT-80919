@@ -1,0 +1,39 @@
+{% extends 'miapp/base.html' %}
+{% load static %}
+
+{% block title %}
+    Todos los Cursos
+{% endblock title %}
+
+{% block content %}
+    <h1>Listado de todos los cursos (HTML)</h1> 
+    <table style="border:5px solid">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Inscriptos</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for id, nombre, inscriptos in cursos  %}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{nombre}}</td>
+                <td>{{inscriptos}}</td>
+            </tr>                
+            {% endfor %}
+                
+        </tbody>
+    </table>
+
+    <br>
+    <h4><a href="{% url 'acerca' %}">Ir a Acerca de mi</a></h4>
+    <h4><a href="{% url 'index' %}">Home</a></h4>
+    <h4><a href="{% url 'uncurso' 1 %}">Un Curso (1)</a></h4>
+
+{% endblock content %}
+
+
+    
