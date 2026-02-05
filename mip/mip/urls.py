@@ -19,6 +19,10 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include, path
 
+admin.site.site_header = "Aplicacion Cursos"
+admin.site.index_title = "Titulo de la Aplicacion"
+admin.site.site_title = "Django Aplicacion"
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("miapp/", include('miapp.urls')),

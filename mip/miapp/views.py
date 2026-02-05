@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.http import HttpResponse, JsonResponse, Http404, HttpResponseRedirect
 import sqlite3
 from .forms import *
+from .models import *
 
 # Create your views here.
 def index(request):
@@ -179,6 +180,24 @@ def nuevoCurso(request):
             conn.close()
             return HttpResponseRedirect(reverse("allcursos"))
 
+    else:
+        form = FormularioCurso()
+
+    ctx = { "form": form }
+    return render(request, "miapp/nuevocurso.html", ctx)
+
+#__________________________________________________________________
+def allCursos_orm(request):
+    cursos = Curso.objects.all()
+    ctx = {"cursos": cursos}
+    return render(request, "miapp/cursos_orm.html", ctx)
+
+def nuevoCurso_orm(request):
+    if request.method == "POST":
+        form = FormularioCurso(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("allcursos_orm"))
     else:
         form = FormularioCurso()
 
