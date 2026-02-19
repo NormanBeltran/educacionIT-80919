@@ -32,6 +32,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    # Aplicaciones de terceros
+    #'jazzmin',
+    "django_ckeditor_5",
+
     # Aplicaciones de Django
     "django.contrib.admin",
     "django.contrib.auth",
@@ -43,7 +48,6 @@ INSTALLED_APPS = [
     # Aplicaciones de negocio
     "mapp",
 
-    # Aplicaciones de terceros
 ]
 
 MIDDLEWARE = [
@@ -130,3 +134,30 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "toolbar": [
+            "heading", "|",
+            "bold", "italic", "link",
+            "bulletedList", "numberedList",
+            "blockQuote",
+        ],
+    },
+    "extends": {
+        "toolbar": {
+            "items": [
+                "heading", "|",
+                "bold", "italic", "underline", "strikethrough", "|",
+                "link", "bulletedList", "numberedList", "|",
+                "outdent", "indent", "|",
+                "insertTable", "blockQuote", "codeBlock", "|",
+                "undo", "redo",
+                "imageUpload",
+            ]
+        },
+    },
+}

@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib import admin
 from django.utils.html import format_html
+from django_ckeditor_5.fields import CKEditor5Field
+from django.core.exceptions import ValidationError
+
 
 # Create your models here.
 class Gender(models.Model):
@@ -31,7 +34,8 @@ class Company(models.Model):
 
 class Movie(models.Model):
     name = models.CharField(max_length=50, verbose_name="Película")
-    description = models.TextField(verbose_name="Sinopsis")
+    #description = models.TextField(verbose_name="Sinopsis")
+    description = CKEditor5Field("Sinopsis", config_name="extends", blank=True, null=True)
     RATING = [
         (1, "Mala"),
         (2, "Mediocre"),
@@ -50,10 +54,17 @@ class Movie(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+
+    def clean(self):
+        super().clean()
+        if self.premiere < 1900:
+            raise ValidationError({'premiere': "Año no puede ser menor a 1900"})
+
     class Meta:
         verbose_name_plural = "Películas"
         verbose_name = "Película"
         ordering = ["name"]
+
 
     @admin.display(ordering="name")
     def pelicula(self):

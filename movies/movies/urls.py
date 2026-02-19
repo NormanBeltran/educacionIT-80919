@@ -23,6 +23,7 @@ from . import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("mapp.urls")),
+    path("ckeditor5/", include("django_ckeditor_5.urls")),
 ]
 
 if settings.DEBUG:

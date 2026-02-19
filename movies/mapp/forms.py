@@ -1,5 +1,6 @@
 from django import forms
 from .models import Movie
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 class MovieForm(forms.ModelForm):
     class Meta:
@@ -8,7 +9,8 @@ class MovieForm(forms.ModelForm):
 
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Película'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder':'Sinopsis'}),
+            #'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder':'Sinopsis'}),
+            "description": CKEditor5Widget(attrs={"class": "django_ckeditor_5"}, config_name="extends"),
             'rating': forms.Select(attrs={'class': 'form-control', 'placeholder':'Rating'}),
             'genders': forms.SelectMultiple(attrs={'class': 'form-control', 'placeholder':'Géneros'}),
             'company': forms.Select(attrs={'class': 'form-control', 'placeholder':'Compañía'}),
